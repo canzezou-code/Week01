@@ -1,0 +1,10 @@
+{
+  "description": "Delivers an interactive lesson presentation with smooth page-flip animations and images to engage users and enhance learning experiences.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="<!-- figma:lang -->">
+  <head>
+    <!-- figma:head-start -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <script>
+      (() => {
+        const retryKey = "lesson14-module-retry";
+
+        window.addEventListener(
+          "error",
+          (event) => {
+            const failedModule =
+              event.target instanceof HTMLScriptElement &&
+              event.target.type === "module";
+            const importFailure =
+              event.message?.includes("Importing a module script failed") ||
+              event.message?.includes(
+                "Failed to fetch dynamically imported module",
+              );
+
+            if ((!failedModule && !importFailure) || sessionStorage.getItem(retryKey)) {
+              return;
+            }
+
+            sessionStorage.setItem(retryKey, "pending");
+            const url = new URL(window.location.href);
+            url.searchParams.set("module-retry", Date.now().toString());
+            window.location.replace(url);
+          },
+          true,
+        );
+      })();
+    </script>
+    <title><!-- figma:title --></title>
+    <!-- figma:head-end -->
+  </head>
+  <body>
+    <!-- figma:body-start -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- figma:body-end -->
+  </body>
+</html>
